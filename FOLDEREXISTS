@@ -1,0 +1,8 @@
+Function FOLDEREXISTS(strFolderPath As String) As Boolean
+
+    Dim objFSO As Object
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+    If objFSO.FOLDEREXISTS(strFolderPath) Then FOLDEREXISTS = True
+    Set objFSO = Nothing
+
+End Function
