@@ -1,6 +1,6 @@
 Function FOLDEREXISTS(strFolderPath As String) As Boolean
 
-'Defini se um diretório existe, ex: =FOLDEREXISTS("C:\TESTE"), retornando Verdadeiro ou Falso.
+'Define se um diretório existe, ex: =FOLDEREXISTS("C:\TESTE"), retornando Verdadeiro ou Falso.
 
     Dim objFSO As Object
     Set objFSO = CreateObject("Scripting.FileSystemObject")
