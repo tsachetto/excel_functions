@@ -1,4 +1,4 @@
-Function CONTCAR(ByRef Texto As String, ByVal Caractere As String) As Integer
+Public Function CONTCAR(ByRef Texto As String, ByVal Caractere As String) As Integer
 
 'Contar Caracteres:
 'Função elaborada para contar a quantidade de caracteres ou uma série de caracteres dentro de uma célula.
