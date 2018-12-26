@@ -1,7 +1,7 @@
 # excel
 Funções de Excel
 
-Repositório pessoal de funções criadas via VBA para MS Excel.
+Repositório pessoal de funções autorais em VBA para MS Excel.
 
 Qualquer coisa me procure através do e-mail:
 
