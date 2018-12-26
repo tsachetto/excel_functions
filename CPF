@@ -7,10 +7,10 @@ Dim parte1, parte2, parte3, parte4, parte5, cp As String
 
 cp = Right("00000000000000" & NBR, 11)
 
-parte1 = Left(cp, 3)
-parte2 = Mid(cp, 4, 3)
-parte3 = Mid(cp, 8, 3)
-parte4 = Right(cp, 2)
+  parte1 = Left(cp, 3)
+  parte2 = Mid(cp, 4, 3)
+  parte3 = Mid(cp, 7 , 3)
+  parte4 = Right(cp, 2)
 
 CPF = parte1 & "." & parte2 & "." & parte3 & "-" & parte4
 
