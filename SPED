@@ -1,6 +1,6 @@
 Public Function SPED(cel As String, nr As Long) As String
 
-'Como utilizar:
+'Como utilizar: a função extrai valores de qualquer coluna de uma referida linha do SPED, sem a necessidade de quebrar o arquivo em colunas.
 
 ' =SPED(Célula contendo o bloco de layout, Número Coluna que vc quer)
 'Exemplo: =SPED(A1;5) irá retornar a quinta coluna do layout colado na célula A1.
