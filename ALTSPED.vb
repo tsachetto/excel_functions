@@ -5,7 +5,7 @@ Public Function ALTSPED(cel As String, nr As Long, vr) As String
 'Exemplo: =SPED(A1;6;"alt") irá retornar a linha com a sexta coluna do layout colado na célula A1 alterado para "alt".
 '|C181|06|5405|218,88|0|218,88|0|||0|2|   <vira>   |C181|06|5405|218,88|0|alt|0|||0|2|
 
-Dim posicao, inicial, final, xlen As Long
+Dim posicao, inicial, final, tamanho As Long
 Dim tx, cr As String
 
 cr = "|"
