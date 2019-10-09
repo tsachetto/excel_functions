@@ -3,7 +3,7 @@ Public Function ALTERDATA(ByRef Area As Range) As String
 'Função elaborada com a finalidade de concatenar dados no layout padrão Alterdata Contábil Windows.
 'Sendo baseada em 08 colunas com os valores dispostos respectivamente na seguinte ordem:
 'Débito, Crédito, Data, Valor, Histórico Padrão e Complemento Histórico.
-'Ex. de Utilização, na Célular I1: =ALTERDATA(A1:H1)
+'Ex. de Utilização, na Célula I1: =ALTERDATA(A1:H1)
 'Ex. de Resultado: "","250","5","01/05/2013","1580,20","","SERVIÇO PRESTADO NF 2252"
 
 Dim sep, virg, txt As String
