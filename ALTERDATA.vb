@@ -15,7 +15,9 @@ virg = ","
 
     For i = 1 To 8
     
-        If i = 5 Then
+        If i = 4 Then
+         txt = txt & sep & Format(Area(1, 4), "dd/mm/yyyy") & sep & virg
+        ElseIf i = 5 Then
               txt = txt & sep & Format(Round(Area(1, 5), 2), "0.00") & sep & virg
             ElseIf i = 7 Then
               txt = txt & sep & UCase(Area(1, 7)) & sep & virg
