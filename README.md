@@ -1,4 +1,4 @@
-[![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/DAVFoundation/captain-n3m0/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/tsachetto/excel_functions/blob/add-license-1/LICENSE.md)
 
 # excel
 Funções de Excel
