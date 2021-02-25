@@ -1,4 +1,4 @@
-Sub addseerrosel()
+Sub addseerros()
   
     'Função destinada a adicionar a fórmula "=SEERRO" em todas as células da Active Selection.
   
