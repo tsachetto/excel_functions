@@ -1,6 +1,5 @@
 Public Function SPED(sped As String, amtI As Integer)
-Dim ini As Integer, fim As Integer, count As Integer
-ini = 0
+Dim ini As Integer, fim As Integer
 For i = 1 To amtI
 ini = InStr((ini + 1), sped, "|")
 fim = InStr((ini + 1), sped, "|")
