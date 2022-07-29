@@ -87,8 +87,11 @@ End If
 
 End Function
 '-----------------------------------------------------
-Public Function SOMASPED(spedtexto As Range, registro As String, coluna As Integer) As Double
+Public Function SOMASPED(spedtexto As Range, coluna As Integer, registro As String) As Double
 'Definir a range, o registro e a coluna sped
+'Como utilizar: =SOMASPEDREF(range com o sped texto;número da coluna dentro do sped cujo vr se encontr, registro)
+'Elaborada em 29/07/22
+
 Dim ini As Integer, fim As Integer
 
 SOMASPED = 0
@@ -109,5 +112,49 @@ For Each cell In spedtexto
         fim = 0
         
     Else: End If
+Next
+End Function
+
+Public Function SOMASPEDREF(spedtexto As Range, coluna As Integer, registro As String, colunaref As Integer, refemsi As String) As Double
+'Definir a range, o registro e a coluna sped
+'Elaborada em 29/07/22
+'Como utilizar: =SOMASPEDREF(range com o sped texto;número da coluna dentro do sped cujo vr se encontr, registro, coluna do criterio, critério)
+Dim ini As Integer, fim As Integer
+
+ 
+0
+
+For Each cell In spedtexto
+
+    If Mid(cell, 2, 4) = registro Then
+        
+        For i = 1 To colunaref
+        ini = InStr((ini + 1), cell, "|")
+        fim = InStr((ini + 1), cell, "|")
+        Next
+        
+        TxRef = Mid(cell, (ini + 1), (fim - ini - 1))
+        ini = 0
+        fim = 0
+        
+        If TxRef = refemsi Then
+            
+            For i = 1 To coluna
+            ini = InStr((ini + 1), cell, "|")
+            fim = InStr((ini + 1), cell, "|")
+            Next
+            
+            vrSPED = Mid(cell, (ini + 1), (fim - ini - 1)) + 0
+            SOMASPEDREF = SOMASPEDREF + vrSPED + 0
+    
+            ini = 0
+            fim = 0
+            
+        Else: End If
+        
+    Else: End If
+    
+            
+    
 Next
 End Function
