@@ -86,3 +86,28 @@ End If
 
 
 End Function
+'-----------------------------------------------------
+Public Function SOMASPED(spedtexto As Range, registro As String, coluna As Integer) As Double
+'Definir a range, o registro e a coluna sped
+Dim ini As Integer, fim As Integer
+
+SOMASPED = 0
+
+For Each cell In spedtexto
+
+    If Mid(cell, 2, 4) = registro Then
+        
+        For i = 1 To coluna
+        ini = InStr((ini + 1), cell, "|")
+        fim = InStr((ini + 1), cell, "|")
+        Next
+        
+        vrSPED = Mid(cell, (ini + 1), (fim - ini - 1)) + 0
+        SOMASPED = SOMASPED + vrSPED + 0
+
+        ini = 0
+        fim = 0
+        
+    Else: End If
+Next
+End Function
