@@ -1,0 +1,18 @@
+Public Function regxcount(CellContent As Range, RegexPattern As String) As Long
+    Dim RegEx As Object
+    Dim Matches As Object
+
+    If RegexPattern = "" Then
+        CountRegexMatches = 0
+        Exit Function
+    End If
+
+    Set RegEx = CreateObject("VBScript.RegExp")
+    With RegEx
+        .Global = True
+        .Pattern = RegexPattern
+    End With
+
+    Set Matches = RegEx.Execute(CellContent.Value)
+    regxcount = Matches.Count
+End Function
