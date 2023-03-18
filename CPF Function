@@ -1,0 +1,17 @@
+Function CPF(ByVal inputText As String) As String
+    Dim regEx As Object
+    Set regEx = CreateObject("vbscript.regexp")
+    
+    ' Preenche com zeros à esquerda, caso necessário
+    If Len(inputText) < 11 Then
+        inputText = Right(String(11, "0") & inputText, 11)
+    End If
+
+    With regEx
+        .Global = False
+        .MultiLine = False
+        .IgnoreCase = False
+        .Pattern = "(\d{3})(\d{3})(\d{3})(\d{2})"
+        CPF = .Replace(inputText, "$1.$2.$3-$4")
+    End With
+End Function
