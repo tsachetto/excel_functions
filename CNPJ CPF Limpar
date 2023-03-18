@@ -1,0 +1,12 @@
+Public Function LimparCNPJCPF(ByVal inputText As String) As String
+    Dim regEx As Object
+    Set regEx = CreateObject("vbscript.regexp")
+    
+    With regEx
+        .Global = True
+        .MultiLine = False
+        .IgnoreCase = False
+        .Pattern = "[\./-]"
+        LimparCNPJCPF = .Replace(inputText, "")
+    End With
+End Function
