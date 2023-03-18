@@ -1,0 +1,22 @@
+Public Function SONUMEROS(ByVal inputText As String) As String
+    Dim regEx As Object
+    Dim matches As Object
+    Dim match As Variant
+    Dim result As String
+
+    Set regEx = CreateObject("vbscript.regexp")
+
+    With regEx
+        .Global = True
+        .MultiLine = False
+        .IgnoreCase = False
+        .Pattern = "\d"
+        Set matches = .Execute(inputText)
+    End With
+
+    For Each match In matches
+        result = result & match.Value
+    Next match
+
+    SONUMEROS = result
+End Function
