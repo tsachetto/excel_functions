@@ -1,0 +1,22 @@
+Public Function REGX(ByVal inputText As String, pat As String) As String
+    Dim regEx As Object
+    Dim matches As Object
+    Dim match As Variant
+    Dim result As String
+
+    Set regEx = CreateObject("vbscript.regexp")
+
+    With regEx
+        .Global = True
+        .MultiLine = False
+        .IgnoreCase = False
+        .Pattern = pat
+        Set matches = .Execute(inputText)
+    End With
+
+    For Each match In matches
+        result = result & match.Value
+    Next match
+
+    REGX = result
+End Function
