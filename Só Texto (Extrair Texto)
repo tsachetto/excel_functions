@@ -1,0 +1,24 @@
+Public Function SOTEXTO(ByVal inputText As String) As String
+    Dim regEx As Object
+    Dim result As String
+
+    Set regEx = CreateObject("vbscript.regexp")
+
+    With regEx
+        .Global = True
+        .MultiLine = False
+        .IgnoreCase = False
+        .Pattern = "\d"
+        result = .Replace(inputText, "")
+    End With
+    
+    With regEx
+        .Global = True
+        .MultiLine = False
+        .IgnoreCase = False
+        .Pattern = "\s{2,}"
+        result = .Replace(result, " ")
+    End With
+
+    SOTEXTO = Trim(result)
+End Function
