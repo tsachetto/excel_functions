@@ -1,0 +1,17 @@
+Public Function CNPJ(ByVal inputText As String) As String
+    Dim regEx As Object
+    Set regEx = CreateObject("vbscript.regexp")
+    
+    ' Preenche com zeros à esquerda, caso necessário
+    If Len(inputText) < 14 Then
+        inputText = Right(String(14, "0") & inputText, 14)
+    End If
+
+    With regEx
+        .Global = False
+        .MultiLine = False
+        .IgnoreCase = False
+        .Pattern = "(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})"
+         CNPJ = .Replace(inputText, "$1.$2.$3/$4-$5")
+    End With
+End Function
