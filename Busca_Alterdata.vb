@@ -50,7 +50,7 @@ ErrorHandler:
     If fileNumber > 0 Then Close #fileNumber
 End Function
 
-Function CHAMADALTERDATA(Chamada As String, Coluna As Integer) As String
+Public Function CHAMADALTERDATA(Chamada As String, Coluna As Integer) As String
 
     'Busca dentro da tabela WPHD Empresa qualquer informação por Chamada
     
