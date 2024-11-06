@@ -1,96 +1,79 @@
-Public Function CNPJPFALTERDATA(CNPJ As String, Coluna As Integer) As String
-    
-    'Busca dentro da tabela WPHD Empresa qualquer informação por CNPJ
+Public Function BUSCAPHD(DADO As Variant, COLUNA As Integer) As Variant
 
-    Dim filePath As String
-    Dim lineData As String
-    Dim fields() As String
-    Dim fileNumber As Integer
+    'Busca dados no cadastro de empresas do WPHD com base no código de chamada ou CPF/CNPJ
+    'Aplicação:
+    '=BUSCAPHD(DADO,COLUNA)
+    'DADO = Chamada, CNPJ ou CPF
+    'COLUNA = Use valores de 1 a 67 correspondentes às colunas da tabela de cadastro de Empresa    
     
-    ' Caminho do arquivo
-    filePath = "\\192.168.1.251\Arquivos\Controle Contabilidade\BD\Tabelas\Empresas.txt"
-    
-    ' Remove caracteres especiais do CNPJ fornecido
-    CNPJ = Replace(Replace(Replace(Replace(CNPJ, ".", ""), "/", ""), "-", ""), " ", "")
-    
-    ' Define o número do arquivo
-    fileNumber = FreeFile
-    
-    ' Tenta abrir o arquivo para leitura
+    Dim FilePath As String
+    Dim FileNum As Integer
+    Dim LineData As String
+    Dim Columns() As String
+    Dim Found As Boolean
+    Dim DADO_Clean As String
+    Dim ColunaValue As Variant
+    Dim tmp As Variant
+
     On Error GoTo ErrorHandler
-    Open filePath For Input As #fileNumber
-    
-    ' Lê o arquivo linha por linha
-    Do While Not EOF(fileNumber)
-        Line Input #fileNumber, lineData
-        fields = Split(lineData, ";")
-        
-        ' Normaliza o CNPJ ou CPF do arquivo removendo caracteres especiais
-        Dim fileCNPJ As String
-        fileCNPJ = Replace(Replace(Replace(Replace(fields(17), ".", ""), "/", ""), "-", ""), " ", "")
-        
-        ' Verifica se o campo 18 (normalizado) é igual ao CNPJ fornecido
-        If fileCNPJ = CNPJ Then
-            ' Verifica se o índice da coluna é válido
-            If Coluna >= 1 And Coluna <= UBound(fields) + 1 Then
-                CNPJPFALTERDATA = fields(Coluna - 1) ' Retorna o valor da coluna especificada
-            Else
-                CNPJPFALTERDATA = "Índice de coluna inválido"
+
+    ' Primeiro, limpar o DADO
+    DADO_Clean = Trim(CStr(DADO))
+
+    If Len(DADO_Clean) <= 5 Then
+        ' Se for até 5 dígitos, transformar em inteiro sem zeros à esquerda
+        DADO_Clean = CStr(Val(DADO_Clean))
+    Else
+        ' Se tiver mais de 5 dígitos, remover ".", "/", "-"
+        DADO_Clean = Replace(DADO_Clean, ".", "")
+        DADO_Clean = Replace(DADO_Clean, "/", "")
+        DADO_Clean = Replace(DADO_Clean, "-", "")
+    End If
+
+    ' Agora, abrir o arquivo e começar a busca
+    FilePath = "\\192.168.1.251\Arquivos\Controle Contabilidade\BD\Tabelas\Empresas.txt"
+    FileNum = FreeFile
+    Open FilePath For Input As #FileNum
+
+    Found = False
+
+    Do While Not EOF(FileNum)
+        Line Input #FileNum, LineData
+        Columns = Split(LineData, ";")
+        If Len(DADO_Clean) <= 5 Then
+            ' Buscar na Coluna 1
+            If UBound(Columns) >= COLUNA - 1 Then
+                If Trim(Columns(0)) = DADO_Clean Then
+                    ColunaValue = Columns(COLUNA - 1)
+                    Found = True
+                    Exit Do
+                End If
             End If
-            Close #fileNumber
-            Exit Function
+        Else
+            ' Buscar na Coluna 18 após limpar caracteres especiais
+            If UBound(Columns) >= Application.WorksheetFunction.Max(17, COLUNA - 1) Then
+                tmp = Replace(Columns(17), ".", "")
+                tmp = Replace(tmp, "/", "")
+                tmp = Replace(tmp, "-", "")
+                If Trim(tmp) = DADO_Clean Then
+                    ColunaValue = Columns(COLUNA - 1)
+                    Found = True
+                    Exit Do
+                End If
+            End If
         End If
     Loop
-    
-    ' Caso não encontre, retorna uma mensagem
-    CNPJPFALTERDATA = "-"
-    
-ErrorHandler:
-    ' Fecha o arquivo em caso de erro
-    If fileNumber > 0 Then Close #fileNumber
-End Function
 
-Public Function CHAMADALTERDATA(Chamada As String, Coluna As Integer) As String
+    Close #FileNum
 
-    'Busca dentro da tabela WPHD Empresa qualquer informação por Chamada
-    
-    Dim filePath As String
-    Dim lineData As String
-    Dim fields() As String
-    Dim fileNumber As Integer
-    
-    ' Caminho do arquivo
-    filePath = "\\192.168.1.251\Arquivos\Controle Contabilidade\BD\Tabelas\Empresas.txt"
-    
-    ' Define o número do arquivo
-    fileNumber = FreeFile
-    
-    ' Tenta abrir o arquivo para leitura
-    On Error GoTo ErrorHandler
-    Open filePath For Input As #fileNumber
-    
-    ' Lê o arquivo linha por linha
-    Do While Not EOF(fileNumber)
-        Line Input #fileNumber, lineData
-        fields = Split(lineData, ";")
-        
-        ' Verifica se a primeira coluna é igual ao código de chamada fornecido
-        If fields(0) = Chamada Then
-            ' Verifica se o índice da coluna é válido
-            If Coluna >= 1 And Coluna <= UBound(fields) + 1 Then
-                CHAMADALTERDATA = fields(Coluna - 1) ' Retorna o valor da coluna especificada
-            Else
-                CHAMADALTERDATA = "Índice de coluna inválido"
-            End If
-            Close #fileNumber
-            Exit Function
-        End If
-    Loop
-    
-    ' Caso não encontre, retorna uma mensagem
-    CHAMADALTERDATA = "Não encontrado"
-    
+    If Found Then
+        BUSCAPHD = ColunaValue
+    Else
+        BUSCAPHD = CVErr(xlErrNA)
+    End If
+
+    Exit Function
+
 ErrorHandler:
-    ' Fecha o arquivo em caso de erro
-    If fileNumber > 0 Then Close #fileNumber
+    BUSCAPHD = CVErr(xlErrValue)
 End Function
