@@ -12,7 +12,7 @@ Public Function SPED(ln_sped As String, campo As Integer) As String
     
     ' Retorna o valor do campo indicado pelo índice "campo"
     SPED = compos_sped(campo)
-    
+    Erase compos_sped
 End Function
 
 '-------------------------------------------------------------------------------------------------------------------------------
@@ -39,4 +39,5 @@ Function ALTSPED(ln_sped As String, campo As Integer, novo_conteudo As String) A
     
     ' Retorna o resultado
     ALTSPED = resultado
+    Erase compos_sped
 End Function
