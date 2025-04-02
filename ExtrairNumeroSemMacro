@@ -1,0 +1,2 @@
+A1: O valor pode começar em qualquer lugar, inclsuive aqui 1255552-572 entendeu
+A2: =EXT.TEXTO(A1;MÍNIMO(SEERRO(PROCURAR({"1";"2";"3";"4";"5";"6";"7";"8";"9";"0"};A1);"-"));PROCURAR(" ";A1;MÍNIMO(SEERRO(PROCURAR({"1";"2";"3";"4";"5";"6";"7";"8";"9";"0"};A1);"-"))+1)-MÍNIMO(SEERRO(PROCURAR({"1";"2";"3";"4";"5";"6";"7";"8";"9";"0"};A1);"-"))+1)
